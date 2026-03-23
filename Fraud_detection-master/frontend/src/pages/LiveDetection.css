@@ -1,0 +1,221 @@
+.live-detection-container {
+  display: flex;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+  .live-detection-container {
+    flex-direction: column;
+  }
+}
+
+.form-card {
+  flex: 1;
+}
+
+.result-card-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.form-input, .form-select {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-glass);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.form-input:focus, .form-select:focus {
+  border-color: var(--neon-blue);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+  background: rgba(0, 240, 255, 0.05);
+}
+
+.form-select option {
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+}
+
+/* Result Card Styles */
+.analysis-result {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem !important;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.status-icon-wrapper {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.status-icon-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -10px; left: -10px; right: -10px; bottom: -10px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  opacity: 0.3;
+  animation: ripple 2s infinite cubic-bezier(0.1, 0.5, 0.9, 1);
+}
+
+@keyframes ripple {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+.status-text {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.risk-score {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.score-value {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.reasons-list {
+  width: 100%;
+  text-align: left;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: auto;
+}
+
+.reasons-list h4 {
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.reason-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.reason-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Status specific themes */
+.status-safe {
+  color: var(--neon-green);
+  box-shadow: 0 0 30px rgba(0, 255, 102, 0.1) inset;
+  border-color: rgba(0, 255, 102, 0.3);
+}
+
+.status-warning {
+  color: #ffb700; /* Yellow/Orange */
+  box-shadow: 0 0 30px rgba(255, 183, 0, 0.1) inset;
+  border-color: rgba(255, 183, 0, 0.3);
+}
+.text-neon-warning {
+  color: #ffb700;
+  text-shadow: 0 0 10px rgba(255, 183, 0, 0.4);
+}
+
+.status-fraud {
+  color: var(--neon-red);
+  box-shadow: 0 0 50px rgba(255, 51, 102, 0.2) inset;
+  border-color: rgba(255, 51, 102, 0.5);
+  animation: flashDanger 2s infinite;
+}
+
+@keyframes flashDanger {
+  0% { box-shadow: 0 0 30px rgba(255, 51, 102, 0.2) inset; }
+  50% { box-shadow: 0 0 80px rgba(255, 51, 102, 0.4) inset, 0 0 20px rgba(255, 51, 102, 0.2); }
+  100% { box-shadow: 0 0 30px rgba(255, 51, 102, 0.2) inset; }
+}
+
+.empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 3rem;
+}
+
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: currentColor;
+  opacity: 0.5;
+  box-shadow: 0 0 15px currentColor;
+  animation: scan 3s linear infinite;
+  display: none;
+}
+
+.status-fraud .scan-line {
+  display: block;
+}
+
+@keyframes scan {
+  0% { top: 0; opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.8; }
+  100% { top: 100%; opacity: 0; }
+}
